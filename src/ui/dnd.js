@@ -24,7 +24,7 @@ module.exports = function (context) {
           zoomextent(context);
         }
         d3.select('body').classed('dragover', false);
-      })
+      }, context)
     )
     .on('dragenter.import', over)
     .on('dragleave.import', exit)

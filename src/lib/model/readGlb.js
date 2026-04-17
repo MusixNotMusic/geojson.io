@@ -1,7 +1,7 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import WarpModel from '../../geometry/WarpModel.js';
 
-export function readGlb(file, closed) {
+export function readGlb(file, closed, context) {
   // 创建一个指向该文件的临时 URL
   const reader = new FileReader();
   reader.onload = function (e) {
@@ -15,6 +15,16 @@ export function readGlb(file, closed) {
       (gltf) => {
         const wrap = new WarpModel(file.name, gltf.scene);
         window.scene.add(wrap);
+
+        if (context && context.data) {
+          context.data.addModel({
+            id: wrap.id,
+            name: wrap.name,
+            visible: wrap.visible,
+            instance: wrap
+          });
+        }
+
         closed();
       },
       (error) => {

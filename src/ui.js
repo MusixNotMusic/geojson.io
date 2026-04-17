@@ -4,7 +4,8 @@ const buttons = require('./ui/mode_buttons'),
   // userUi = require('./ui/user'),
   layer_switch = require('./ui/layer_switch'),
   projection_switch = require('./ui/projection_switch'),
-  toggle_3d = require('./ui/3d-buildings-toggle');
+  toggle_3d = require('./ui/3d-buildings-toggle'),
+  // model_list = require('./ui/model_list');
 
 module.exports = ui;
 
@@ -79,9 +80,16 @@ function ui(context) {
 
     const top = right
       .append('div')
-      .attr('class', 'top border-b border-solid border-gray-200');
+      .attr('class', 'top border-b border-solid border-gray-200 shrink-0');
 
-    const pane = right.append('div').attr('class', 'pane group');
+    const pane = right
+      .append('div')
+      .attr('class', 'pane group relative flex-1 overflow-auto');
+
+    // const modelPanel = right
+    //   .append('div')
+    //   .attr('class', 'model-panel shrink-0 max-h-64 overflow-auto')
+    //   .call(model_list(context));
 
     // user ui, disabled for now
     // top

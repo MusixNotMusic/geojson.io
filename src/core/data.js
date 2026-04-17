@@ -13,6 +13,7 @@ function _getData() {
       type: 'FeatureCollection',
       features: []
     },
+    models: [],
     dirty: false,
     source: null,
     meta: null,
@@ -98,6 +99,40 @@ module.exports = function (context) {
 
   data.all = function () {
     return clone(_data, false);
+  };
+
+  data.addModel = function (model) {
+    _data.models.push(model);
+    data.dirty = true;
+    context.dispatch.change({
+      models: _data.models
+    });
+    return data;
+  };
+
+  data.removeModel = function (id) {
+    _data.models = _data.models.filter((m) => m.id !== id);
+    data.dirty = true;
+    context.dispatch.change({
+      models: _data.models
+    });
+    return data;
+  };
+
+  data.updateModel = function (id, updater) {
+    const idx = _data.models.findIndex((m) => m.id === id);
+    if (idx >= 0) {
+      updater(_data.models[idx]);
+      data.dirty = true;
+      context.dispatch.change({
+        models: _data.models
+      });
+    }
+    return data;
+  };
+
+  data.getModels = function () {
+    return clone(_data.models, false);
   };
 
   data.fetch = function (q, cb) {

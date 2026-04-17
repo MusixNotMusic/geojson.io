@@ -60,10 +60,8 @@ p.intro-hint:hover {
 }
 
 .right .pane {
-  position: absolute;
-  top: 40px;
-  bottom: 0;
-  width: 100%;
+  position: relative;
+  flex: 1 1 0%;
   overflow: auto;
 }
 

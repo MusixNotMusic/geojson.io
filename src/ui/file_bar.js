@@ -248,7 +248,7 @@ module.exports = function fileBar(context) {
           if (!(files && files.length)) return;
           Array.from(files).forEach((file) => {
             readFile.readAsText(file, (err, text) => {
-              readFile.readFile(file, text, onImport);
+              readFile.readFile(file, text, onImport, context);
               if (file.path) {
                 context.data.set({
                   path: file.path

@@ -15,7 +15,7 @@ const closed = () => {
   d3.select('body').classed('dragover', false);
 };
 
-function readDrop(callback) {
+function readDrop(callback, context) {
   return function () {
     const results = [];
     const errors = [];
@@ -39,7 +39,7 @@ function readDrop(callback) {
               if (res) results.push(res);
               if (war) results.push(war);
               if (!--remaining) finish(errors, results, war);
-            });
+            }, context);
           }
         });
       });
@@ -95,7 +95,7 @@ function readAsText(f, callback) {
   }
 }
 
-function readFile(f, text, callback) {
+function readFile(f, text, callback, context) {
   const fileType = detectType(f, text);
 
   if (!fileType) {
@@ -186,7 +186,7 @@ function readFile(f, text, callback) {
     callback(null, polytogeojson(text));
   } else if (fileType === 'glb') {
     // callback(null, toGeoJSON.glb(text));
-    readGlb(f, closed);
+    readGlb(f, closed, context);
   }
 
   function toDom(x) {
