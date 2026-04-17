@@ -10,7 +10,9 @@
       "Bash(npx rollup *)",
       "Bash(npm ls *)",
       "Bash(git checkout *)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(git restore *)"
     ]
   }
 }
