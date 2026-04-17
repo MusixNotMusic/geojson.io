@@ -4,11 +4,16 @@ const topojson = require('topojson-client'),
   csv2geojson = require('csv2geojson'),
   osmtogeojson = require('osmtogeojson'),
   polytogeojson = require('polytogeojson'),
-  geojsonNormalize = require('@mapbox/geojson-normalize');
+  geojsonNormalize = require('@mapbox/geojson-normalize'),
+  readGlb = require('./model/readGlb.js').readGlb;
 
 module.exports.readDrop = readDrop;
 module.exports.readAsText = readAsText;
 module.exports.readFile = readFile;
+
+const closed = () => {
+  d3.select('body').classed('dragover', false);
+};
 
 function readDrop(callback) {
   return function () {
@@ -179,6 +184,9 @@ function readFile(f, text, callback) {
     }
   } else if (fileType === 'poly') {
     callback(null, polytogeojson(text));
+  } else if (fileType === 'glb') {
+    // callback(null, toGeoJSON.glb(text));
+    readGlb(f, closed);
   }
 
   function toDom(x) {
@@ -218,5 +226,7 @@ function readFile(f, text, callback) {
     ) {
       return 'gtfs-stops';
     }
+    // GLB files
+    if (ext('.glb')) return 'glb';
   }
 }

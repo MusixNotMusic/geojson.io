@@ -1,4 +1,6 @@
 const mapboxgl = require('mapbox-gl');
+const Base3D = require('@cdyw/asd-3d').Base3D;
+// const Cube = require('../../geometry/cube.js').default;
 
 require('qs-hash');
 const geojsonRewind = require('@mapbox/geojson-rewind');
@@ -459,6 +461,15 @@ module.exports = function (context, readonly) {
         'map-data-line',
         handleLinestringOrPolygonClick
       );
+
+      const scene = new Base3D.MapboxThreeScene(
+        '3d-scene',
+        context.map,
+        true,
+        true
+      );
+
+      window.scene = scene;
     });
 
     context.map.on('draw.create', created);
