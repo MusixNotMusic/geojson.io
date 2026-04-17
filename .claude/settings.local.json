@@ -1,7 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(git push *)",
+      "Bash(git reset *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(grep -n \"require\\\\$\\\\$4\\\\$3\" E:/github/geojson.io/dist/bundle.js)",
+      "Bash(npx rollup *)",
+      "Bash(npm ls *)",
+      "Bash(git checkout *)",
+      "Bash(npm install *)"
     ]
   }
 }
